@@ -1,0 +1,211 @@
+JSX 
+-----
+
+function print(){
+	
+	return (
+
+	<h1> hi welcome to react </h1>	
+	<p>
+
+	<div>
+
+	<span>	
+
+	)
+
+}
+
+ what are the ways to develop React js
+------------------------------------------
+1) java script ( js , jsx) 
+2) Type script ( ts, tsx ) 
+
+
+-> JS
+  -----
+Its only used for the small applications 
+learning curve is very easy
+there no error handling at the type of compilation 
+
+->TS
+-----
+-> At the compilation it will give erros
+-> we can reduce the no of bugs gonna create in the future
+-> Mostly used for the high scalable or large applications.
+-> so industries mostly preferring react dev using type scipt. 
+
+
+Installations
+----------------
+
+-> Node js
+
+-> RTE -> Run time environment
+
+-> cmd> 
+
+	node -v 
+	npm -v
+	npx -v
+
+npm -> node package manager
+npx -> node package executor / extractor
+
+------
+
+
+---------------------------------------------------------
+
+=> SPA
+--------
+-> Single page appicatios
+
+=> its web application it loads only one HTML page
+   on the browser and changes the required data without      re-loading the web page
+
+
+-> Navigations and routers - > 
+
+
+import { Routers , Rout  } form '.headerRouters.jsx'
+
+
+function app(){
+  
+return  {
+	
+	<Routes>
+
+		<Rout  path= '.about'> 
+
+	</Routes>
+
+}
+} 
+
+it increase performance and efficiency of the web application 
+
+-----------------------------------------------------
+
+type to create react application 
+
+1) create-react-app    => Old approach 
+2) vite		       => New approach
+
+
+1) create-react-app
+-------------------
+
+step1 - 
+
+-> you need to maitain separate folder for react applicatiion
+-> open CMD terminal 
+
+1st approach
+------------
+-> cmd>     
+	npm i -g create-react-app my-first-app
+
+i -> install 
+g -> globally.
+
+-> we can run the react application from anywhere.
+-> ll get version campatibility isses while running gloablly
+
+2) aprroach in create-react-app
+
+-> cmd-1>     npx create-react-app my-first-app
+
+=> cmd-2>     npx create-react-app@latest my-app-latest
+
+Disadvantage
+-> it takes some time to install all the packages or modules which are required to create react application.
+
+
+
+2) vite
+========
+
+  	
+command 1-> npm create vite@latest second-app
+
+> npx
+> create-vite second-app
+
+|
+o  Select a framework:
+|  React
+|
+o  Select a variant:
+|  JavaScript
+|
+o  Scaffolding project in H:\Malla reddy\Training Classes\React\class 1\New folder\second-app...
+
+
+
+command 2 -> 
+
+	npm create vite@latest "myfileName" -- --templete react
+
+
+-------------------------------------------------
+
+Project structure
+-----------------
+
+
+JSX -> Java script + xml 
+
+means js contains html tags or react created component tags 
+ inside of the java script
+
+const name = () => {
+	
+	<h1> hi this is react js </h1>
+
+	<p> hi </P>
+	
+
+}
+
+varibale 
+function s
+expressions
+all 
+
+
+in created react project 
+
+2 CSS files    -> App.css , Index.css
+2 Jsx files    -> main.jsx , App.jsx
+
+1 html file [ index ] 
+
+
+html.html  > main.jsx   [using  index.css>  > App.jsx [App.css] 
+
+
+
+JSX
+----
+
+-> camel casing rule
+-> only one -> export default  is allowed
+-> we can include js inside of the html tags or react provided
+-> multiple tags can be enclosed by single div tag
+
+
+import and export
+
+
+
+
+
+
+
+
+
+
+
+

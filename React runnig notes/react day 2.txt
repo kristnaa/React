@@ -1,0 +1,233 @@
+Components -> function or classes
+
+
+props  
+-----
+means a property used to transfer the data from 
+one file to another file 
+
+ex-> 
+
+Parent ------------> Child
+
+
+props passing
+--------------
+
+these are simply like a function parameters
+
+we can pass these props in the form of fu()
+arguments
+
+Syntax
+------
+
+````jsx --Parent
+----------------
+
+  <Greetings name="Krishna"/>
+
+
+
+````jsx - child 
+------------------
+
+function Greet(props)}{
+
+return <h1> props.name </h1>
+
+}
+
+
+Rules 
+-----
+1) Its always Parent to child relation 
+2) DE-structuring is also possible in props.
+3) you can use any type of word while accessing the values from the parent.
+4) we can pass any type of data as a function properties
+
+De-Structuring : 
+---------------
+
+we can pass property values directly in side of the function () parameters 
+using { } 
+
+-> even if you only one element or the key as a parameter { } mandatory.
+
+ex:
+-----
+function Greetings({name ,feeling}){
+
+        return <h1> Hi , {name} ! how u doing
+        , do u feel {feeling}!! </h1>
+}
+
+String formatter
+----------------
+
+you should enclose all the content in side of the { `   ${name} , ${age}    `}  
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+default properties or Props 
+===========================
+
+-> if the parent not passing any values for the child function parameters , there we can use default props in side of function parameters
+-> to avoid the parameter elements or properties initializing with undefined
+
+```jsx
+-------
+import React from "react";
+
+function DefaultProps({name="cyber security", color1="blue" , color2="white", text="Click here"}){
+
+    return (  <div>
+
+        <h2> default property is : {name} </h2> 
+
+        <button style={{backgroundColor: color1 , color: color2}}>  {text} </button>
+    
+    </div> )
+}
+
+export default DefaultProps 
+
+==========================================================================================
+
+
+PropTypes
+=========
+We can assign types for the properties which are going to passed as function parameters
+
+
+-> it will not provide any validation and not give any type of error in the compile time or 
+ any runtime 
+
+-> it will give just warnings in the console especially while inspecting the webpage in the yellow color
+-> that to if your are using system in the form developer mode.
+
+run command
+-----------
+
+cmd>  npm install proptypes
+
+
+````files 
+
+
+Greeting.jsx
+=============
+
+import React from "react";
+import PropTypes from "prop-types";
+
+
+function Greetings({name,feeling, age, isHuman}){
+
+        return (
+            <div>
+                <h1> Hi , {name} ! how u doing, do u feel {feeling}!! </h1>
+                <h2> Age : {age}</h2>
+                <h2>Is Human : {isHuman? "yes" : "NO"}</h2>
+
+                <h1> {`Hi my dear, ${name}, you feel ${feeling},,right `}</h1>
+            </div>
+
+            
+        )
+}
+
+Greetings.PropTypes = {
+
+    name : PropTypes.string.isRequired,
+    age : PropTypes.number,
+    feeling : PropTypes.string,
+    isHuman : PropTypes.bool
+
+}
+
+
+export default Greetings
+
+
+Default pro.jsx
+=================
+
+
+import React from "react";
+
+
+function DefaultProps({name="cyber security", color1="blue" , color2="white", text="Click here"}){
+
+
+    return (  <div>
+
+        <h2> default property is : {name} </h2> 
+
+        <button style={{backgroundColor: color1 , color: color2}}>  {text} </button>
+    
+    
+    </div> )
+    
+    
+
+}
+
+export default DefaultProps
+
+
+
+App.jsx
+=======
+
+
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import MyData from './components/MyData'
+import Greetings from './components/Greetings'
+import DefaultProps from './components/DefaultProps'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+       <MyData />
+       <Greetings name="Krishna"  
+       
+        feeling="Excited"
+
+        age={50}
+
+        isHuman = {false}
+/>
+
+
+
+        <DefaultProps  name="isro"/>
+
+
+    </>
+  )
+}
+
+export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

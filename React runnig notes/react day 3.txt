@@ -1,0 +1,321 @@
+
+										hooks ?
+									====================
+
+`````````````````What are Hooks in React?
+
+	
+-> Before hooks, only class components could use things React features. Hooks make it possible to use these features in function components too!
+
+-> Hooks are special functions in React that let you “hook into” [means To connect to something ] React features from your function components 
+	  
+	React feature -> like state, lifecycle methods, context, etc. use these all without writing classes using hooks.
+
+
+``````````````````Commonly Used Hooks
+
+Here are some of the most important hooks:
+
+Hook Name	What It Does							Example Use
+--------------------------------------------------------------------------------------------------------
+useState	Adds state to your function component				Counting clicks, toggles
+useEffect	Runs code when something changes (like lifecycle methods)	Fetching data, timers
+useContext	Lets you use context (global data) in your component		Theme, user info , Accesses context API
+useRef		Lets you keep a mutable value that doesn’t cause re-render	Accessing DOM elements.
+
+
+
+````````````````🧠 What Is "State"?
+In React, state is a data container that holds information about the component. When the state changes, React automatically re-renders the component with the new data.
+
+Think of it like memory that changes over time—for example, the number in a counter, the text in an input box, or the items in a shopping cart.
+
+
+
+
+
+````````````````Example: useState and useEffect
+
+
+import { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  }, [count]);
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Clicked {count} times
+    </button>
+  );
+}
+
+Note  : 
+------
+useState -> lets you keep track of the number of clicks.
+
+useEffect -> lets you update the page title every time the count changes.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+````````````````````What is useState?
+
+-> In simple terms, useState lets you store and update values over time in a functional component. These values persist between re-renders of the component.
+
+
+Syntax: 
+------
+
+const [state, setState] = useState(initialValue);
+
+````Parameters:
+
+initialValue: The starting value of your state (can be any data type: number, string, object, array, etc.).
+
+````Returns:
+
+state: The current value of the state.  //store the current value.
+
+setState: A function to update the state. When called, it re-renders the component with the new state value.
+
+
+```````````````````🔄 Example: Counter Component
+
+import React, { useState } from 'react';
+
+
+function Counter() {
+  const [count, setCount] = useState(0); // count is the state variable
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+
+
+
+````````````````Explanation:
+
+
+useState(0) initializes the state with the value 0.
+
+count holds the current state value.
+
+setCount is used to update the state.
+
+Clicking the button calls setCount(count + 1), which updates the state and causes the component to re-render.
+
+
+
+useEffect 
+=========
+
+for title update
+
+
+useEffect(()=> {
+  document.title = `you clicked like almost ${count} times`
+});
+
+
+Example class room code:
+------------------------
+
+import { useEffect, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import Mydata from './components/MyData'
+import Card from './components/Card'
+
+function App() {
+
+  const [count, setCount] = useState(0);
+
+  // function incCount(){
+  //   return setCount(count + 1)
+  // }
+
+
+  useEffect(() => {
+
+    document.title = `title changed for ${count} times`
+  }
+
+  );
+
+  return (
+
+    <>
+      <div>
+        <h2>  You clicked the button {count} times </h2>
+
+        <button onClick={() => setCount(count + 1)}> Click here</button>
+
+
+      </div>
+    </>
+  )
+}
+
+export default App
+
+
+
+``````````````````````1. Reading State
+
+-> When you use useState, it returns the current value of the state. You can use that value anywhere inside your JSX or logic.
+
+-> previously we seen example with Number as count with inital value 0 , now we can take " some string  " 
+
+import React, { useState } from 'react';
+
+function Greeting() {
+  const [name, setName] = useState('Alice'); // Initial state: 'Alice'
+
+  return (
+    <h1>Hello, {name}!</h1> // We're reading the state here
+  );
+}
+
+ ````````````````````````2. Updating State
+
+-> You update state using the setter function returned by useState. When you call this function, React updates the state and re-renders the component.
+-> use the useState code example only .
+
+`````Array Example:
+
+const [items, setItems] = useState([]);
+
+setItems(prevItems => [...prevItems, 'New item']);
+
+
+
+
+
+
+
+`````````````````````What Are User Events?
+
+User events are interactions from the user, such as:
+
+1.Clicking a button			(onClick)
+
+2.Typing in a text field		(onChange)
+
+3.Submitting a form			(onSubmit)
+
+4.Hovering over an element
+
+5.Pressing a key
+
+-> React provides a way to listen for these events and respond with event handlers—just like in HTML/JavaScript, but with some differences.
+
+1) Clicking a button
+----------------------
+
+already we have seen some use case on the above.
+
+
+2) Input Event (onChange)
+----------------------
+
+import React, { useState } from "react";
+
+function InputOnChangeEx() {
+
+    const [name, setName] = useState('');
+
+    function setChange(event) {
+
+       setName(event.target.value)
+    }
+
+    return (
+        <div>
+            <input type="text" onChange={setChange} />
+            <h2> name changed here {name} </h2>
+            
+        </div>
+    )
+}
+
+export default InputOnChangeEx
+
+
+-> use this in App.jsx after import 
+
+`````````````event.target.value gives you the value typed in the input box.
+
+```````````This updates the state and re-renders the UI.
+
+
+
+```````````````````````````````````````What Is State Immutability?
+
+Immutability means not changing the original data directly.
+
+In React, you should never modify the state directly. Instead, create a new copy of the state and update it.
+
+
+
+React uses shallow comparison to detect changes in state and props. If you mutate the state directly, React might not notice a change and won’t re-render your component properly.
+
+
+``````````````❌ Mutating State (Bad Practice)
+
+const [numbers, setNumbers] = useState([1, 2, 3]);
+
+
+
+`````````````❌ Direct mutation (don't do this!)
+
+numbers.push(4);
+setNumbers(numbers); // React may not re-render correctly!
+
+
+```````````````✅ Immutable Update (Good Practice)
+
+// ✅ Create a new array with the new value
+setNumbers([...numbers, 4]);
+
+
+
+State Immutability
+-------------------
+
+
+count = 0 ;   // mutable object
+
+
+++count
+count--
+
+count = 2;
+count = 5;
+
+
+
+
+take one more copy of the previous element and than update there only
+
+setCount( count + 0 ) ;
+
+
+
+
+
+
+
+
+
+
+
+

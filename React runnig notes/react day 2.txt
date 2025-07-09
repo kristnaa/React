@@ -109,7 +109,7 @@ We can assign types for the properties which are going to passed as function par
 run command
 -----------
 
-cmd>  npm install proptypes
+cmd>  npm install prop-types
 
 
 ````files 

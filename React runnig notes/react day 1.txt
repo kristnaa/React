@@ -124,7 +124,7 @@ Disadvantage
 
 
 
-2) vite
+2) vite   [New approach] 
 ========
 
   	
@@ -149,6 +149,7 @@ command 2 ->
 	npm create vite@latest "myfileName" -- --templete react
 
 
+Note -> USE VITE approach to create the react app ,dont use Create react app
 -------------------------------------------------
 
 Project structure

@@ -1,0 +1,459 @@
+Key concepts
+-------------
+
+-> JSX -> java script + xml
+
+	we can include html eliments inside of 
+	 java script  and vice versa
+
+	 the file ext -> is .jsx
+
+-> Importnace of App fn ()  component
+	App() -> root function for entire all jsx files
+
+-> Create Structure Components easy 
+	in 2 ways u can write -> function expression or Arrow function 
+			     -> Normal function
+-> Component creations either -> 
+
+		-> classes
+		-> functions  // recommended
+
+-> terminate of Tags -> self Close or close tag is mandatory
+	self termination or open & close termination tags
+	<button />      or  <button> </button> 
+
+-> importance of <div> or <></> or <React.Fragment> or <Fragment> -> use as a parent tags inside js for html elements
+
+-> Component folder structure -> we should keep separate folder for jsx files or componenents
+
+-> Component structure -> with functions 
+	
+	1) normal functions
+	2) function expressions.  ---> use this for better way
+
+-> import and export use and export default usage
+
+-> Injecting one component to another component with self closing tag
+
+-> CSS stylings -> not inline, internal
+   use only external css file with import.
+
+-> With external CSS file 
+
+	-> Add color for text with inline ->  <h1 style={{ color: "red" }}>App Component</h1>
+
+	-> Add color for Internak css -> 
+
+``````code for internal css in JSX file
+
+
+
+function App() {
+
+  let mycolor = {
+
+    color: "blue"
+  }
+
+  return (
+
+    <>
+
+      <h1 style={mycolor}>App Component</h1>
+
+      <Practice />
+
+    </>
+
+  )
+
+}
+
+	-> Add CSS features in Eternal file 
+
+CODE
+----
+
+body {
+
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    background-color: rgb(111, 247, 249);
+    text-align: center;
+}
+
+.container {						// give parent div tag with className as = "container"
+
+    background-color: rgb(237, 244, 43);
+    width: 200px;
+    display: inline-block;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 15px;
+    box-shadow: 0 3px 5px rgb(37, 37, 34);
+
+}
+
+.img {							// give img tag with className as = "img"
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+-> export default importance
+				
+
+-> props-> like attributes of HTML 
+
+     <img src=""  alt="" width="" height="">   like we can use props.name or props.age
+  
+	Code -> 
+	------
+
+import React from "react";
+
+const Mydata = (props) => {
+
+
+    let myStyle = {
+        color: "red"
+    }
+
+    return (
+
+        <div className = "container">
+
+            <h1>{JSON.stringify(props.name)}</h1>
+
+	    <img className = "container" src={props.image} alt="image info" />
+            
+	    <h1>{props.name}</h1>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Iste veniam est suscipit at, minima animi doloremque eligendi esse assumenda atque officiis nesciunt, dolor architecto laborum 				maiores non tempora. Quasi iusto ipsam sed, provident hic perferendis fuga quisquam debitis doloremque eligendi.</p>
+		
+            <h1 style={myStyle}>App Component</h1>
+        </div>
+    )
+}
+
+export default Mydata
+
+
+-> for above code pass some values from using parent APP component
+
+	-> <Mydata   name="Krishna" >   or 
+	-> <Mydata   name="Krishna"   image = {you need to give the image file name here form the given path in import statement} />  
+
+Note-> to use Image file you need to download and store in one folder and keep that folder in assets folder in ur react project 
+
+-> assets  -> to store data for my project devlopment like images, or any files,,....etc
+
+-> props -> Html attributes  - Strings , Numbers , Objects with JSON.stringfy()
+-> props -> with images and prepare some cards.
+
+-> cards with useState with Array 
+
+-> html inside js ->  return ()
+-> js inside html -> {}
+
+
+-> same cards with export class and static variabel and method with service class
+
+-> Ternary & short-circuit rendering, Looping with map, Keys in lists, Dynamic lists
+
+
+
+child Data component
+--------------
+
+
+import React from "react";
+
+const Data = (props) => {
+  return (
+    <div className="container">
+      <img className="img" src={props.image} alt="" />
+      <h2>{props.name}</h2>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias impedit
+        optio, provident illo commodi quidem accusamus, suscipit fugiat
+        adipisci, a dignissimos. Eos, exercitationem numquam. A similique atque
+        maiores soluta quis.
+      </p>
+    </div>
+  );
+};
+
+export default Data;
+
+
+
+
+Service folder to maintain raw data 
+-----------------------------------
+
+export class data {
+
+
+    static tour = [
+        {
+
+            place: "INDIA",
+            url: "https://media2.thrillophilia.com/images/photos/000/179/468/original/1573889763_shutterstock_1135776713.jpg?w=753&h=450&dpr=1.5",
+            id: 1
+
+        },
+        {
+
+            place: "JAPAN",
+            url: "https://media2.thrillophilia.com/images/photos/000/179/468/original/1573889763_shutterstock_1135776713.jpg?w=753&h=450&dpr=1.5",
+            id: 1
+
+        },
+
+        {
+
+            place: "CANADA",
+            url: "https://media2.thrillophilia.com/images/photos/000/179/468/original/1573889763_shutterstock_1135776713.jpg?w=753&h=450&dpr=1.5",
+            id: 1
+
+        },
+
+        {
+
+            place: "LONDON",
+            url: "https://media2.thrillophilia.com/images/photos/000/179/468/original/1573889763_shutterstock_1135776713.jpg?w=753&h=450&dpr=1.5",
+            id: 1
+
+        },
+
+
+
+    ];
+
+    static getData() {
+
+        return this.tour;
+    }
+
+}
+
+
+
+Acceess raw data in child componenet
+---------------------------------------
+
+import React, { useState } from "react";
+import { data } from "../services/data";
+
+const Practice = () => {
+
+    const [name, setName] = useState(data.getData());
+
+    return (
+        <>
+            {
+                name.map((element, index) => {
+                    return (
+                        <>
+                            <div className="container">
+
+                                <img src={name[index].url} alt="image" width="100%" />
+
+                                <h2 >{name[index].place} </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ducimus consequatur nam distinctio saepe dignissimos at. Molestiae, esse nihil? Ipsum magnam quos quo, reiciendis illum explicabo molestiae inventore commodi expedita?</p>
+
+                            </div>
+
+                        </>
+                    )
+                })
+            }
+
+        </>
+    )
+}
+
+export default Practice
+
+
+------------------------
+
+From App component Access the child component > along with service class 
+
+
+import React, { Fragment } from 'react'
+import './Mycss.css'
+import Practice from './components/Demo'
+
+
+
+function App() {
+
+  return (
+    <>
+
+      <h1>App Component</h1>
+      <Practice />
+
+    </>
+
+  )
+
+}
+
+export default App
+
+
+
+
+-----------------------------------------------
+
+[{},{},{}] 
+
+	
+2 options
+----------
+
+1) write html in side JS 
+
+	return ( <></> )
+
+2) write JS inside html 
+		
+	{   // js } 
+
+
+-------------------------
+
+for Array Looping or Iterations
+
+->      
+
+	{
+        tour.map((element,index)=>{
+            return (
+                // div elements here
+            )
+        })
+    }
+
+
+
+-----------------------------------
+
+
+React: Ternary & Short-Circuit Rendering + Keys in Lists + Dynamic Lists
+=========================================================================
+
+1. TERNARY OPERATOR RENDERING
+------------------------------
+- Used to render one of two components based on a condition.
+
+Syntax:
+{ condition ? <ComponentA /> : <ComponentB /> }
+
+Example:
+function Greeting({ isLoggedIn }) {
+  return (
+    <div>
+      {isLoggedIn ? <h1>Welcome back!</h1> : <h1>Please sign in.</h1>}
+    </div>
+  );
+}
+
+Use When:
+- You need to show either A or B based on a condition.
+
+--------------------------------------------------------------------------
+
+2. SHORT-CIRCUIT RENDERING
+---------------------------
+
+a) Using && (Logical AND):
+- Renders a component only if the condition is true.
+
+Syntax:
+{ condition && <Component /> }
+
+Example:
+function Notification({ hasNewMessages }) {
+  return (
+    <div>
+      <h1>Inbox</h1>
+      {hasNewMessages && <p>You have new messages!</p>}
+    </div>
+  );
+}
+
+Note:
+Avoid using falsy values like 0 directly as a condition.
+
+b) Using || (Logical OR):
+- Shows a fallback if the first value is falsy.
+
+Syntax:
+{ value || <FallbackComponent /> }
+
+Example:
+function UserProfile({ name }) {
+  return (
+    <div>
+      <p>Name: {name || "Guest"}</p>
+    </div>
+  );
+}
+
+
+--------------------------------------------------------------------------
+
+3. KEYS IN LISTS
+-----------------
+- Keys help React identify items in a list and track changes.
+
+Why Important?
+- Avoids re-rendering all items
+- Prevents bugs when list items are reordered or updated
+
+Good Practice:
+- Use a unique, stable value like item.id
+- Avoid using index as a key unless list never changes
+
+Example (Good):
+const users = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+
+function UserList() {
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+Example (Bad):
+{items.map((item, index) => (
+  <li key={index}>{item}</li>  // Bad if list is reordered
+))}
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

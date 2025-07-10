@@ -25,7 +25,7 @@ useRef		Lets you keep a mutable value that doesn’t cause re-render	Accessing D
 
 
 
-````````````````🧠 What Is "State"?
+````````````````What Is "State"?
 In React, state is a data container that holds information about the component. When the state changes, React automatically re-renders the component with the new data.
 
 Think of it like memory that changes over time—for example, the number in a counter, the text in an input box, or the items in a shopping cart.
@@ -83,7 +83,7 @@ state: The current value of the state.  //store the current value.
 setState: A function to update the state. When called, it re-renders the component with the new state value.
 
 
-```````````````````🔄 Example: Counter Component
+``````````````````` Example: Counter Component
 
 import React, { useState } from 'react';
 
@@ -269,21 +269,21 @@ In React, you should never modify the state directly. Instead, create a new copy
 React uses shallow comparison to detect changes in state and props. If you mutate the state directly, React might not notice a change and won’t re-render your component properly.
 
 
-``````````````❌ Mutating State (Bad Practice)
+``````````````Mutating State (Bad Practice)
 
 const [numbers, setNumbers] = useState([1, 2, 3]);
 
 
 
-`````````````❌ Direct mutation (don't do this!)
+`````````````Direct mutation (don't do this!)
 
 numbers.push(4);
 setNumbers(numbers); // React may not re-render correctly!
 
 
-```````````````✅ Immutable Update (Good Practice)
+```````````````Immutable Update (Good Practice)
 
-// ✅ Create a new array with the new value
+// Create a new array with the new value
 setNumbers([...numbers, 4]);
 
 

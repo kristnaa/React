@@ -1,0 +1,100 @@
+Day 5 
+-------
+
+
+-> Code for react form handling and form submission by using some form tag elements
+-> Storing the eliments in in java script object.
+
+
+-----
+Note -> Use your own CSS file for the form file
+     -> and import the your own created css file in side of the App.jsx file
+
+
+---------code
+
+
+import React, { useState } from "react";
+
+const Registration = () => {
+
+    const [form, setForm] = useState({
+
+        firstName: '',
+        lastName: '',
+        email: ' ',
+        gender: '',
+        course: '',
+        textArea: '',
+        check: ''
+    });
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: [e.target.value] })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!form.firstName || !form.lastName) {
+            alert('Please fill All the inputs before submitting')
+            return;
+        }
+
+        console.log(form);
+        alert('Form Submitted Successfully')
+    }
+
+
+    return (
+
+        <>
+            <h2>Registration form</h2><br />
+
+            <form onSubmit={(e) => { handleSubmit(e) }} >
+
+
+
+                <label htmlFor="firstName">First Name  : </label>
+                <input type="text" id="firstName" name="firstName" placeholder="enter frist name" onChange={(e) => { handleChange(e) }} /><br /><br />
+
+                <label htmlFor="lastName">Last Name  : </label>
+                <input type="text" id="lastName" name="lastName" placeholder="enter last name" onChange={(e) => { handleChange(e) }} /><br /><br />
+
+
+                <label htmlFor="email">Email : </label>
+                <input type="email" id="email" name="email" placeholder="enter mail id @gmail.com" onChange={(e) => { handleChange(e) }} required /><br /><br />
+
+
+                <label htmlFor="gender">Gender : </label>
+                <input type="radio" id="gender" name="gender" onChange={(e) => { handleChange(e) }} required /> Male
+                <input type="radio" id="gender" name="gender" onChange={(e) => { handleChange(e) }} required /> Female
+                <input type="radio" id="gender" name="gender" onChange={(e) => { handleChange(e) }} required /> Others  <br /><br />
+
+                <label htmlFor="course">Select Course</label>
+                <select name="course" id="course">
+                    <option value="select">   --select-- </option>
+                    <option value="java">Java</option>
+                    <option value="Python ">Python</option>
+                    <option value="C#">C#</option>
+                    <option value="scalar">Scalar</option>
+                    <option value="rubi">Rubi</option>
+                </select><br /><br />
+
+                <label htmlFor="textarea">About you</label><br />
+                <textarea name="textarea" id="textarea" rows="6" cols="60" onChange={(e) => { handleChange(e) }}></textarea><br /><br />
+
+
+                <input type="checkbox" />
+                <label htmlFor="checkbox"> Terms and Conditions</label><br />
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae eos eaque facilis voluptate velit, provident aliquam rem corrupti, perspiciatis quo maxime voluptas vero quae ducimus neque placeat inventore architecto cumque.</p>
+
+                <button type="reset">Reset</button>
+                <button type="submit">Submit</button>
+
+            </form>
+        </>
+    )
+}
+
+export default Registration

@@ -1,0 +1,287 @@
+
+use Effect
+----------
+
+-> its like call back function , it will execute after return statement,
+   without any manual call.
+
+-> It Updates for every state changes .
+
+
+Conditions
+-----------
+
+1) No dependancy  ->It Updates for every state changes
+2) Empty Array dependancy  -> []   - No update or execution happens ,but execution happense only at page load on web.
+
+   -> 
+	if you want to fetch some data inside of a web page , but u dont need that data at the beginning of page load and we can substitute the values/data later that 	return from the API into the web page.
+
+3) Array dependancy -> [ xx ]    -> It behaves same as like with No dependancy.
+
+		[ count ] 
+
+		[ count ] [ count1 ]
+
+
+Component Creation Shortcut
+-------------------------
+Type RFCS + Enter  -> to automatic imoprt and export and creation of component
+
+
+``````````````RFCS -> react functional component export
+
+
+
+
+-> Create component
+-> create useState
+
+->create return ( //html eliments h1, h2,button ),
+
+-> button -> add on clickOn ()   -> it will call one funtion that ll increment COUNT
+
+-> useEffect()
+
+
+--------------- Life cycle of compoenent.
+
+In React, every component has a life cycle:
+
+1) Mount — when the component is added to the screen (rendered)
+
+2) Update — when it re-renders because state or props change
+
+3) Unmount — when it’s removed from the screen
+	  -> The component is no longer visible or active, and React is cleaning it up from the page.
+
+
+function cleanUp
+-----------------
+
+The "cleanup function" in React refers to an optional function returned from the useEffect hook. This function is crucial for managing side effects and preventing memory leaks in React applications.
+
+use cases -> 
+----------
+ -> for setTimeOut
+-> set Intervel
+-> use AbortController to use function clean up 
+
+
+Real-Time App Scenarios Where Cleanup Functions Are Needed
+----------------------------------------------------------
+
+1. User navigates away while data is loading
+   - App: Job Portal
+   - Scenario: A user clicks to view a job post. Before the data finishes loading, they click "Back".
+   - Cleanup: Abort the fetch request using AbortController to prevent memory leaks.
+
+2. Live chat or messaging
+   - App: WhatsApp Web clone
+   - Scenario: A user enters a chat (WebSocket opens), then switches to another chat.
+   - Cleanup: Close the WebSocket connection when leaving the chat.
+
+3. Video streaming or screen sharing
+   - App: Zoom or YouTube
+   - Scenario: A user watches a video or starts screen sharing, then leaves the page.
+   - Cleanup: Stop video/audio streams and clear timers.
+
+4. Auto-refresh dashboards
+   - App: Admin analytics dashboard
+   - Scenario: The dashboard fetches data every 30 seconds using setInterval.
+   - Cleanup: Clear the interval when the user leaves the dashboard view.
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+Use Effect () -> code 
+=====================
+
+import React, { useEffect, useState } from 'react'
+
+function Hooks() {
+
+    const [count, setCount] = useState(0);
+    const [count1, setCount1] = useState(0);
+
+
+
+    useEffect(() => {
+        console.log('statement created', count + ' ' + count1)
+    }, [count] [count1]);
+
+	
+    // previous use case with empty array dependancy
+	
+
+    //	     useEffect(() => {
+    //     console.log('statement created', count + ' ' + count1)
+    // 	    },[]);
+	
+
+    return (
+
+        <>
+            <div>
+                <h1>Child or  Hoosk component</h1><br />
+
+                <h2>clicked times -- {count} </h2><br /><br />
+
+                <button onClick={() => { setCount(count + 1) }}>Click to Incre </button>
+
+                <input type="text" onChange={(e) => { setCount(e.target.value) }} />
+            </div>
+
+            <div>
+                <h1>Child or  Hoosk component</h1><br />
+
+                <h2>clicked times -- {count1} </h2><br /><br />
+
+                <button onClick={() => { setCount(count1 + 1) }}>Click to Incre </button>
+
+                <input type="text" onChange={(e) => { setCount1(e.target.value) }} />
+            </div>
+
+        </>
+    )
+}
+
+
+
+
+export default Hooks
+
+
+```````````````````````````````````````````````````
+
+Fetch API code
+
+-----------------
+
+
+for Fetch API use dummy json data from  the JsonPlaceholder website
+
+url -> https://jsonplaceholder.typicode.com/users
+
+
+code 
+---
+
+
+
+import React, { useEffect, useState } from 'react'
+
+function FetchData() {
+
+    const [records, setRecords] = useState([]);
+
+    function getData() {
+
+        // const controller = new AbortController();
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => { setRecords(data) })
+    }
+
+    useEffect(() => {
+        getData();
+        console.log('loading useEffect')
+    }, []);
+
+    function removeData() {
+        setRecords([])
+    }
+
+
+    return (
+        <div>
+            <h1>Fetch Epmoyees data</h1><br /><br />
+
+            <button onClick={getData}>get Information</button>
+
+            <button onClick={removeData}>Delete Information</button>
+
+            <ul>
+                {
+                    records.map((list, index) => (
+                        <React.Fragment key={list.id}>
+                            <li> Employee Name : {list.name}  </li>
+                            <li > username : {list.username} </li>
+                            <li > email :  {list.email}</li> <br />
+                        </React.Fragment>
+
+                    ))
+                }
+            </ul>
+
+
+
+        </div>
+
+
+    )
+}
+
+export default FetchData
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Array structure in Json data and use cases to access the child onjects in nested array 
+
+
+
+ [{},{},{}{}{}{{ name : 'krish' , price : 788} , { }]
+
+var  arr = 	{ 
+
+		name : "krishna"
+		age : 50
+
+		address  : {
+			
+			sector : "sector 11 "
+
+			}	
+	}
+
+
+console.log( arr.name ) 
+
+
+console.log( arr.address.sector ) 
+
+
+
+
+var list =  
+          {
+    "id": 1,
+    "name": "Leanne Graham",
+    "username": "Bret",
+    "email": "Sincere@april.biz",
+    "address": {
+      "street": "Kulas Light",
+      "suite": "Apt. 556",
+      "city": "Gwenborough",
+      "zipcode": "92998-3874",
+      "geo": {
+        "lat": "-37.3159",
+        "lng": "81.1496"
+      }
+
+to access'
+----------
+list.id;
+list.address.ziocode;
+
+
+
+
+
+
+
+
+
+	

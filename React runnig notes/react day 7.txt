@@ -1,0 +1,310 @@
+
+Routing in React (React Router v6)	BrowserRouter, Routes, Route, Link, useNavigate, useParams, Nested routing
+Hands-on				Create multi-page app (Home, About, Product Details) with dynamic route.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+-> What is SPA ?
+-> What is React-router DOM , Why ? 
+-> and its installation 
+-> Waht is Browser Router? 
+-> Create different pages for routing
+-> Use <Routes> and <Route> 
+-> Use <Link> for Navigation
+-> Create a simple NavBar
+-> UseNavtigate for programatic Navigation
+-> Nested Routes ?
+
+
+
+
+
+-> What is SPA ?
+----------------
+
+-> one 1 HTML page only , page never reloads , content update by use of Js & ReactRouter  , smooth and fast 
+
+-> No page reloads, fast user exp , low data wastage  , URL changes using java scripts , Load only once if you make 100 navigatoions .
+
+
+React Router DOM
+---------------
+
+-> library used to handle the navigations
+-> allows user to move one page to another page without reloading 
+-> React is SPA -> only one HTML page loads on browser and update the views dynamically .
+
+
+Installation 
+------------
+
+npm install react-router-dom
+
+
+
+Why Use Reactor Router
+-----------------------
+
+without this -> if u clik a link it reloads the page
+	     -> React components will lost and reload
+
+With This  -> page dont reload
+	   -> only view the changes
+	   -> Navigation is faster and smoother
+	   -> Used for multipaged applications.
+
+
+Browser-Roouter - The Main wrapper
+----------------------------------
+
+-> is a component that wraps your entire app and enables routing features
+-> use it in the main file -> main.jsx 
+
+	<BrowserRouter></BrowserRouter>
+
+-> keep this inside the main.jsx and place <App/> this App component inside of these BrowserRouter.
+
+
+Syntax:
+-------
+
+  <StrictMode>
+
+    	<BrowserRouter>
+     		<App />
+    	</BrowserRouter>
+
+  </StrictMode>
+
+
+
+Create 3 Pages in Pages folder
+----------------------------
+
+Home.jsx
+About.jsx
+Contact.jsx
+
+
+<Routes> and <Route>
+--------------------
+
+-> These are building blocks for Routing in React.
+
+	<Routes>
+	--------
+		-> Its not a self closing component we need to open and close individully 
+		-> Its a wrapper Component from Reacr-Router-Dom
+		-> It holds all the < Route > Components 
+		-> It checks the current URL & shows the matching Component
+
+	<Route>
+	--------
+		-> Defines a single route
+		-> Has 2 main props : 
+		-> path  :  the URL path
+		-> elemetn : to componenet to show.
+
+Syntax:
+-------
+
+	<Routes>
+
+      		<Route path='/' element={(<h1> index of the page</h1>)} />
+      		<Route path='/home' element={<Home />} />
+      		<Route path='/about' element={<About />} />
+      		<Route path='/contact' element={<Contact />} />
+      		<Route path='*' element={<h1> Wrong path Selected</h1>}/>
+      
+    	</Routes>
+
+
+
+create NAVBAR 
+--------------
+
+
+function Navbar() {
+    return (
+        <nav>
+            <div>My web site</div>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+    );
+}
+
+
+<Link>
+-------
+
+-> Use Link instead of the anchor tag <a> to move one page to another page without reloading.
+-> used to define where the page to go.
+
+	<ul>
+
+		<li>
+                    <Link to={'/home'}>
+                        Home
+                    </Link>
+
+                </li>
+                <li>
+                    <Link to={'/about'}>
+                        About
+                    </Link>
+                </li>
+                <li>
+                    <Link to={'/contact'}>
+                        Contact
+                    </Link>
+                </li>
+
+
+
+
+
+Dynamic Route using URL parameters
+----------------------------------
+
+-> you can create paths that can create dynamic values ( Like an unique IDd's ) .
+
+
+	 <Route path='/user/:name' element={<User />} />
+
+
+-> Crete User component in Pages folder and add one list item in Navber component
+
+	so now we have   -> Home , About , Contact , User 
+
+			-> similarly import the user in App.jsx as well
+
+-> You can access the Id or name in the useParams();
+
+User component in Pages folder
+-----------------------------
+
+
+function User() {
+
+    const { name } = useParams();
+
+
+    return (
+
+        <>
+            <h1> HI this is {name}</h1>
+        </>
+    )
+}
+
+export default User
+
+
+
+-> Update in Navbar component 
+
+                <li>
+                    <Link to={'/user/reddy'}>
+                        User
+                    </Link>
+                </li>
+
+
+
+
+Programatic Navigation with use Navigate
+-----------------------------------------
+
+-> Some times you need to navigate from code [ like after log in ] 
+-> useNavigate() its a function to go to another toute using code.
+
+
+Code :
+-------
+
+
+function Home() {
+
+    const navigate = useNavigate();
+
+    const [name, setName] = useState();
+
+    function goToUser() {
+        navigate(`/user/${name}`)
+    }
+
+
+    return (
+
+
+        <div>
+
+            <h1>welcom to the home page</h1>
+            <input type="text" placeholder='type name here' onChange={(e) => { setName(e.target.value) }} value={name} />
+
+            <br /><br />
+            <button onClick={goToUser}>Proceed User</button>
+
+        </div>
+    )
+}
+
+export default Home
+
+
+Nested Routes [ Child routes ] 
+===============================
+
+
+ <Route path='/dashboard' element={<Dashboard />}>
+
+          <Route path='settings' element={<h2>Settings </h2>} />
+          <Route path='profiles' element={<h2>Profiles </h2>} />
+
+
+ </Route>
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CSS for Nav bar
+-----------------
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: yellow;
+  padding: 0 20px;
+  height: 60px;
+  color:red;
+  font-family: sans-serif;
+}
+
+nav > div {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  padding: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav li:hover {
+  background-color: blueviolet;
+  border-radius: 4px;
+}
